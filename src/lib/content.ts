@@ -200,16 +200,16 @@ export const whyChoose: { title: Localized; desc: Localized }[] = [
 ];
 
 export const partners: { name: string; logo: string }[] = [
-  { name: "Emaar", logo: "/partners/emaar.jpg" },
-  { name: "DAMAC", logo: "/partners/damac.jpg" },
+  { name: "Emaar", logo: "/partners/wiki/emaar.svg" },
+  { name: "DAMAC", logo: "/partners/wiki/damac.svg" },
   { name: "Sobha Realty", logo: "/partners/sobha.jpg" },
-  { name: "Nakheel", logo: "/partners/nakheel.jpg" },
-  { name: "Meraas", logo: "/partners/meraas.jpg" },
-  { name: "Binghatti", logo: "/partners/binghatti.jpg" },
+  { name: "Nakheel", logo: "/partners/wiki/nakheel.svg" },
+  { name: "Meraas", logo: "/partners/wiki/meraas.svg" },
+  { name: "Binghatti", logo: "/partners/wiki/binghatti.webp" },
   { name: "Omniyat", logo: "/partners/omniyat.jpg" },
   { name: "Deyaar", logo: "/partners/deyaar.jpg" },
   { name: "Danube Properties", logo: "/partners/danube.jpg" },
-  { name: "Majid Al Futtaim", logo: "/partners/majid-al-futtaim.jpg" },
+  { name: "Majid Al Futtaim", logo: "/partners/wiki/majid-al-futtaim.svg" },
 ];
 
 export const manifesto = {

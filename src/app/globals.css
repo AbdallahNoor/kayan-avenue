@@ -21,10 +21,10 @@
 
   /* foreground on dark */
   --color-ivory: #efe7d5;
-  --color-ivory-dim: #b3a98f;
+  --color-ivory-dim: #cabfa3;
 
   /* misc */
-  --color-espresso-dim: #5b5040;
+  --color-espresso-dim: #4a4031;
   --color-hair: #c7b89c;         /* warm hairline on light */
   --color-danger: #b15440;
 
@@ -115,15 +115,18 @@ html[lang="ar"] .label { font-family: var(--font-ar); letter-spacing: 0.08em; }
 
 /* Arabic headings need more line-height + padding so gradient (clipped) text
    and tall marks are never cut off */
-html[lang="ar"] .lux-heading { line-height: 1.5; text-wrap: normal; }
+html[lang="ar"] .lux-heading { line-height: 1.6; text-wrap: normal; }
 html[lang="ar"] .lux-heading em {
+  font-style: normal;            /* no synthetic slant on Arabic */
   white-space: normal;
-  padding-bottom: 0.16em;
-  margin-bottom: -0.16em;
+  display: inline-block;
+  padding: 0.14em 0.2em 0.2em;   /* extend gradient box so glyphs aren't clipped */
+  margin: -0.14em -0.08em -0.2em;
 }
 html[lang="ar"] .text-gold-grad {
-  padding-bottom: 0.12em;
-  line-height: 1.5;
+  display: inline-block;
+  padding: 0.04em 0.12em 0.14em;
+  line-height: 1.55;
 }
 
 /* ---------- the signature ARCH motif ---------- */
@@ -145,11 +148,13 @@ html[lang="ar"] .text-gold-grad {
 .marquee-track { display: flex; width: max-content; }
 .marquee-l { animation: marquee-l 42s linear infinite; }
 .marquee-r { animation: marquee-r 50s linear infinite; }
+.marquee-l-slow { animation: marquee-l 70s linear infinite; }
+.marquee-r-slow { animation: marquee-r 82s linear infinite; }
 .marquee-mask:hover .marquee-track { animation-play-state: paused; }
 @keyframes marquee-l { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes marquee-r { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 @media (prefers-reduced-motion: reduce) {
-  .marquee-l, .marquee-r { animation: none; }
+  .marquee-l, .marquee-r, .marquee-l-slow, .marquee-r-slow { animation: none; }
 }
 
 /* refined scrollbar */

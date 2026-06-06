@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useLang } from "@/lib/i18n";
 import { partners } from "@/lib/content";
 import Reveal from "./ui/Reveal";
@@ -12,13 +11,13 @@ const heading = {
 
 function Logo({ name, logo }: { name: string; logo: string }) {
   return (
-    <div className="relative mx-[clamp(20px,3vw,52px)] h-16 w-[clamp(120px,14vw,190px)] shrink-0">
-      <Image
+    <div className="mx-[clamp(20px,3vw,56px)] flex h-20 w-[clamp(170px,18vw,250px)] shrink-0 items-center justify-center">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         src={logo}
         alt={name}
-        fill
-        sizes="190px"
-        className="object-contain opacity-65 mix-blend-multiply grayscale transition-all duration-500 hover:opacity-100 hover:grayscale-0"
+        loading="lazy"
+        className="h-16 w-full object-contain opacity-75 mix-blend-multiply grayscale transition-all duration-500 hover:opacity-100 hover:grayscale-0"
       />
     </div>
   );
@@ -58,13 +57,13 @@ export default function Partners() {
       </div>
 
       <Reveal>
-        <div className="marquee-mask space-y-6">
-          <div className="marquee-track marquee-l">
+        <div className="marquee-mask space-y-8">
+          <div className="marquee-track marquee-l-slow">
             {rowA.map((p, i) => (
               <Logo key={`a-${i}`} name={p.name} logo={p.logo} />
             ))}
           </div>
-          <div className="marquee-track marquee-r">
+          <div className="marquee-track marquee-r-slow">
             {rowB.map((p, i) => (
               <Logo key={`b-${i}`} name={p.name} logo={p.logo} />
             ))}
