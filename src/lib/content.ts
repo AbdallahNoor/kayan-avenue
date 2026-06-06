@@ -199,16 +199,15 @@ export const whyChoose: { title: Localized; desc: Localized }[] = [
   },
 ];
 
-export const partners: { name: string; logo: string }[] = [
+export const partners: { name: string; logo: string; dark?: boolean }[] = [
   { name: "Emaar", logo: "/partners/wiki/emaar.svg" },
   { name: "DAMAC", logo: "/partners/wiki/damac.svg" },
-  { name: "Sobha Realty", logo: "/partners/sobha.jpg" },
+  { name: "Sobha Realty", logo: "/partners/wiki/sobha.svg" },
   { name: "Nakheel", logo: "/partners/wiki/nakheel.svg" },
   { name: "Meraas", logo: "/partners/wiki/meraas.svg" },
   { name: "Binghatti", logo: "/partners/wiki/binghatti.webp" },
-  { name: "Omniyat", logo: "/partners/omniyat.jpg" },
-  { name: "Deyaar", logo: "/partners/deyaar.jpg" },
-  { name: "Danube Properties", logo: "/partners/danube.jpg" },
+  { name: "Omniyat", logo: "/partners/wiki/omniyat.svg", dark: true },
+  { name: "Danube Properties", logo: "/partners/wiki/danube.png" },
   { name: "Majid Al Futtaim", logo: "/partners/wiki/majid-al-futtaim.svg" },
 ];
 

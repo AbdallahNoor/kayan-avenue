@@ -32,6 +32,9 @@ export default function Header() {
     scrollToId(id);
   };
 
+  // light treatment while transparent over the dark hero; dark once scrolled
+  const onLight = scrolled;
+
   return (
     <header
       className={clsx(
@@ -46,8 +49,10 @@ export default function Header() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logo-mark.svg" alt="" className="h-9 w-auto" />
           <span className="flex flex-col leading-none">
-            <span className="font-display text-[1.35rem] font-semibold tracking-[0.04em] text-espresso">Kayan</span>
-            <span className="label mt-1 text-[0.5rem] tracking-[0.34em] text-espresso-dim">
+            <span className={clsx("font-display text-[1.35rem] font-semibold tracking-[0.04em] transition-colors", onLight ? "text-espresso" : "text-ivory")}>
+              Kayan
+            </span>
+            <span className={clsx("label mt-1 text-[0.5rem] tracking-[0.34em] transition-colors", onLight ? "text-espresso-dim" : "text-ivory/70")}>
               {t({ en: "AVENUE PROPERTIES", ar: "أفينيو العقارية" })}
             </span>
           </span>
@@ -58,10 +63,13 @@ export default function Header() {
             <button
               key={n.id}
               onClick={() => go(n.id)}
-              className="group relative text-[0.86rem] font-medium tracking-wide text-espresso/80 transition-colors hover:text-bronze"
+              className={clsx(
+                "group relative text-[0.86rem] font-medium tracking-wide transition-colors",
+                onLight ? "text-espresso/80 hover:text-bronze" : "text-ivory/85 hover:text-gold-light"
+              )}
             >
               {t(n.label)}
-              <span className="absolute -bottom-1 start-0 h-px w-0 bg-bronze transition-all duration-300 group-hover:w-full" />
+              <span className={clsx("absolute -bottom-1 start-0 h-px w-0 transition-all duration-300 group-hover:w-full", onLight ? "bg-bronze" : "bg-gold-light")} />
             </button>
           ))}
         </nav>
@@ -69,7 +77,10 @@ export default function Header() {
         <div className="flex items-center gap-3">
           <button
             onClick={toggle}
-            className="label rounded-full border border-hair px-3.5 py-2 text-[0.7rem] text-espresso transition-colors hover:border-bronze hover:text-bronze"
+            className={clsx(
+              "label rounded-full border px-3.5 py-2 text-[0.7rem] transition-colors",
+              onLight ? "border-hair text-espresso hover:border-bronze hover:text-bronze" : "border-ivory/30 text-ivory hover:border-gold-light hover:text-gold-light"
+            )}
             aria-label="Switch language"
           >
             {lang === "en" ? "ع" : "EN"}
@@ -80,7 +91,7 @@ export default function Header() {
           >
             {t({ en: "Get in Touch", ar: "تواصل معنا" })}
           </button>
-          <button onClick={() => setOpen(true)} className="grid h-10 w-10 place-items-center text-espresso lg:hidden" aria-label="Open menu">
+          <button onClick={() => setOpen(true)} className={clsx("grid h-10 w-10 place-items-center transition-colors lg:hidden", onLight ? "text-espresso" : "text-ivory")} aria-label="Open menu">
             <Menu className="h-6 w-6" strokeWidth={1.5} />
           </button>
         </div>

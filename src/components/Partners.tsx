@@ -9,7 +9,7 @@ const heading = {
   ar: "نتعاون مع <em>أبرز</em> المطورين في دبي.",
 };
 
-function Logo({ name, logo }: { name: string; logo: string }) {
+function Logo({ name, logo, dark }: { name: string; logo: string; dark?: boolean }) {
   return (
     <div className="mx-[clamp(20px,3vw,56px)] flex h-20 w-[clamp(170px,18vw,250px)] shrink-0 items-center justify-center">
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -17,7 +17,11 @@ function Logo({ name, logo }: { name: string; logo: string }) {
         src={logo}
         alt={name}
         loading="lazy"
-        className="h-16 w-full object-contain opacity-75 mix-blend-multiply grayscale transition-all duration-500 hover:opacity-100 hover:grayscale-0"
+        className={
+          dark
+            ? "h-16 w-full object-contain opacity-70 [filter:brightness(0)] mix-blend-multiply transition-opacity duration-500 hover:opacity-100"
+            : "h-16 w-full object-contain opacity-75 mix-blend-multiply grayscale transition-all duration-500 hover:opacity-100 hover:grayscale-0"
+        }
       />
     </div>
   );
@@ -60,12 +64,12 @@ export default function Partners() {
         <div className="marquee-mask space-y-8">
           <div className="marquee-track marquee-l-slow">
             {rowA.map((p, i) => (
-              <Logo key={`a-${i}`} name={p.name} logo={p.logo} />
+              <Logo key={`a-${i}`} name={p.name} logo={p.logo} dark={p.dark} />
             ))}
           </div>
           <div className="marquee-track marquee-r-slow">
             {rowB.map((p, i) => (
-              <Logo key={`b-${i}`} name={p.name} logo={p.logo} />
+              <Logo key={`b-${i}`} name={p.name} logo={p.logo} dark={p.dark} />
             ))}
           </div>
         </div>
