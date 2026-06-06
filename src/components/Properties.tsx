@@ -56,16 +56,18 @@ export default function Properties() {
                     sizes="(max-width:640px) 90vw, (max-width:1024px) 45vw, 23vw"
                     className="object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-110"
                   />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[rgba(34,29,21,0.55)] to-transparent" />
-                  <span className="label absolute start-3 top-4 rounded-full bg-gradient-to-br from-gold-light to-bronze px-3 py-1.5 text-[0.58rem] text-[#221d15]">
-                    {t({ en: "For Sale", ar: "للبيع" })}
-                  </span>
-                  <span className="label absolute end-3 top-4 rounded-full bg-[rgba(34,29,21,0.6)] px-3 py-1.5 text-[0.58rem] text-ivory backdrop-blur-sm">
-                    {t(p.type)}
-                  </span>
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[rgba(34,29,21,0.45)] to-transparent" />
                 </div>
 
                 <div className="px-1 pt-5">
+                  <div className="mb-3 flex flex-wrap items-center gap-2">
+                    <span className="label rounded-full bg-gradient-to-br from-gold-light to-bronze px-3 py-1 text-[0.56rem] text-[#221d15]">
+                      {t({ en: "For Sale", ar: "للبيع" })}
+                    </span>
+                    <span className="label rounded-full border border-[rgba(239,231,213,0.22)] px-3 py-1 text-[0.56rem] text-ivory-dim">
+                      {t(p.type)}
+                    </span>
+                  </div>
                   <p className="mb-1.5 flex items-center gap-1.5 text-[0.8rem] text-gold-light">
                     <MapPin className="h-4 w-4" /> {t(p.location)}
                   </p>

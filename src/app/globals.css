@@ -24,14 +24,14 @@
   --color-ivory-dim: #b3a98f;
 
   /* misc */
-  --color-espresso-dim: #6e6450;
+  --color-espresso-dim: #5b5040;
   --color-hair: #c7b89c;         /* warm hairline on light */
   --color-danger: #b15440;
 
-  --font-display: var(--font-fraunces), Georgia, serif;
-  --font-sans: var(--font-manrope), system-ui, sans-serif;
-  --font-mono: var(--font-mono-jb), ui-monospace, monospace;
-  --font-ar: var(--font-plex-ar), sans-serif;
+  --font-display: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-jost), system-ui, sans-serif;
+  --font-mono: var(--font-cinzel), serif;
+  --font-ar: var(--font-tajawal), sans-serif;
 
   --ease-lux: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
@@ -95,9 +95,11 @@ html[lang="ar"] .label { font-family: var(--font-ar); letter-spacing: 0.08em; }
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.lux-heading { text-wrap: balance; }
 .lux-heading em {
   font-style: italic;
   font-weight: 500;
+  white-space: nowrap;          /* keep accent phrases like "end to end." together */
   color: var(--color-bronze);
   background: linear-gradient(120deg, #e1bd6e 0%, #c19a54 45%, #9a7330 80%, #ddba6c 100%);
   -webkit-background-clip: text;
@@ -109,6 +111,19 @@ html[lang="ar"] .label { font-family: var(--font-ar); letter-spacing: 0.08em; }
   background: linear-gradient(120deg, #efcf86 0%, #ddba6c 50%, #c19a54 100%);
   -webkit-background-clip: text;
   background-clip: text;
+}
+
+/* Arabic headings need more line-height + padding so gradient (clipped) text
+   and tall marks are never cut off */
+html[lang="ar"] .lux-heading { line-height: 1.5; text-wrap: normal; }
+html[lang="ar"] .lux-heading em {
+  white-space: normal;
+  padding-bottom: 0.16em;
+  margin-bottom: -0.16em;
+}
+html[lang="ar"] .text-gold-grad {
+  padding-bottom: 0.12em;
+  line-height: 1.5;
 }
 
 /* ---------- the signature ARCH motif ---------- */

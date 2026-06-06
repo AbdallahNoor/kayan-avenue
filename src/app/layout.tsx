@@ -1,34 +1,34 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Manrope, JetBrains_Mono, IBM_Plex_Sans_Arabic } from "next/font/google";
+import { Cormorant_Garamond, Cinzel, Jost, Tajawal } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
 
-const fraunces = Fraunces({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
-  variable: "--font-fraunces",
+  variable: "--font-cormorant",
   display: "swap",
 });
 
-const manrope = Manrope({
+const cinzel = Cinzel({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-manrope",
+  weight: ["400", "500", "600"],
+  variable: "--font-cinzel",
   display: "swap",
 });
 
-const jetbrains = JetBrains_Mono({
+const jost = Jost({
   subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-mono-jb",
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-jost",
   display: "swap",
 });
 
-const plexArabic = IBM_Plex_Sans_Arabic({
+const tajawal = Tajawal({
   subsets: ["arabic"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-plex-ar",
+  weight: ["300", "400", "500", "700"],
+  variable: "--font-tajawal",
   display: "swap",
 });
 
@@ -74,7 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       dir="ltr"
-      className={`${fraunces.variable} ${manrope.variable} ${jetbrains.variable} ${plexArabic.variable}`}
+      className={`${cormorant.variable} ${cinzel.variable} ${jost.variable} ${tajawal.variable}`}
       suppressHydrationWarning
     >
       <body>

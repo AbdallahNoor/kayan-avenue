@@ -10,7 +10,7 @@ import Counter from "./ui/Counter";
 import { scrollToId } from "./SmoothScroll";
 
 const heading = {
-  en: "Find the right property for the <em>lifestyle</em> you deserve.",
+  en: 'Find the right property<br class="hidden lg:block" /> for the <em>lifestyle</em> you deserve.',
   ar: "اعثر على العقار المناسب <em>لأسلوب الحياة</em> الذي تستحقه.",
 };
 
@@ -48,14 +48,14 @@ export default function Hero() {
           <motion.h1
             variants={{ hidden: { opacity: 0, y: 26 }, show: { opacity: 1, y: 0 } }}
             transition={{ duration: 1, ease }}
-            className="lux-heading mx-auto max-w-5xl font-display text-[clamp(2.6rem,6.2vw,5.2rem)] font-medium leading-[1.03] tracking-[-0.01em] text-espresso"
+            className="lux-heading mx-auto max-w-6xl font-display text-[clamp(2.7rem,6vw,5rem)] font-semibold leading-[1.04] tracking-[-0.01em] text-espresso"
             dangerouslySetInnerHTML={{ __html: lang === "ar" ? heading.ar : heading.en }}
           />
 
           <motion.p
             variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
             transition={{ duration: 0.9, ease }}
-            className="mx-auto mt-6 max-w-xl text-[clamp(1rem,1.3vw,1.16rem)] text-espresso-dim"
+            className="mx-auto mt-6 max-w-xl text-[clamp(1.02rem,1.3vw,1.18rem)] font-normal text-[#3f3526]"
           >
             {t({
               en: "A refined real estate experience focused on premium properties, trusted guidance, and carefully selected opportunities across Dubai.",
@@ -88,7 +88,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, ease, delay: 0.5 }}
-          className="arch relative mx-auto mt-14 aspect-[16/12] w-full max-w-4xl border border-[rgba(154,115,48,0.25)] shadow-[0_50px_100px_-50px_rgba(34,29,21,0.6)] sm:aspect-[16/9]"
+          className="arch relative mx-auto mt-14 aspect-[4/3] w-full max-w-6xl border border-[rgba(154,115,48,0.25)] shadow-[0_50px_100px_-50px_rgba(34,29,21,0.6)] sm:aspect-[16/9]"
         >
           <motion.div style={parallax ? { scale: imgScale, y: imgY } : undefined} className="absolute inset-0">
             <Image src="/images/villa-night.jpg" alt="Luxury villa in Dubai at dusk" fill priority sizes="(max-width:1024px) 100vw, 900px" className="object-cover" />
