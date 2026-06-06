@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+/* ===================================================================
+   KAYAN AVENUE — design tokens (premium dark-luxe + warm cream)
+=================================================================== */
+@theme {
+  /* dark surfaces */
+  --color-noir: #0a0a0b;
+  --color-ink: #101013;
+  --color-coal: #16161a;
+  --color-graphite: #1d1d22;
+
+  /* light surfaces (warm, never stark) */
+  --color-bone: #f2ece1;
+  --color-cream: #e9e2d4;
+  --color-linen: #f7f3ea;
+
+  /* gold + sand */
+  --color-gold: #c2a25c;
+  --color-gold-light: #e2c789;
+  --color-gold-deep: #a07f37;
+  --color-sand: #b9a988;
+
+  /* foreground */
+  --color-fg: #1a1611;
+  --color-fg-dim: #6d6457;
+  --color-ivory: #ece6d9;
+  --color-ivory-dim: #9b9488;
+
+  /* lines */
+  --color-hair: rgba(20, 16, 10, 0.12);
+  --color-hair-light: rgba(255, 255, 255, 0.1);
+
+  --font-display: var(--font-cormorant), Georgia, serif;
+  --font-roman: var(--font-cinzel), serif;
+  --font-sans: var(--font-jost), system-ui, sans-serif;
+  --font-ar: var(--font-tajawal), sans-serif;
+
+  --ease-lux: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ---------- base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ink);
+  color: var(--color-ivory);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: #1a1407;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Arabic font + RTL refinements */
+html[lang="ar"] body {
+  font-family: var(--font-ar);
+}
+html[lang="ar"] .font-display,
+html[lang="ar"] .font-roman {
+  font-family: var(--font-ar);
+}
+
+/* ---------- Lenis smooth scroll ---------- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ---------- utilities ---------- */
+.font-display { font-family: var(--font-display); }
+.font-roman { font-family: var(--font-roman); }
+.font-sans { font-family: var(--font-sans); }
+
+/* gold gradient text with safe fallback */
+.text-gold-grad {
+  color: var(--color-gold);
+  background: linear-gradient(135deg, #e6cd92 0%, #c2a25c 45%, #a07f37 75%, #e2c789 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* editorial heading accent (<em> inside translated headings) */
+.lux-heading em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--color-gold);
+  background: linear-gradient(135deg, #e6cd92 0%, #c2a25c 45%, #a07f37 75%, #e2c789 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.eyebrow {
+  font-family: var(--font-roman);
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+.lux-line {
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+/* refined scrollbar (desktop) */
+@media (pointer: fine) {
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--color-ink); }
+  ::-webkit-scrollbar-thumb {
+    background: #3a342a;
+    border-radius: 10px;
+    border: 2px solid var(--color-ink);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-gold-deep); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
