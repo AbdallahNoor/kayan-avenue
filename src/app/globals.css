@@ -1,40 +1,37 @@
 @import "tailwindcss";
 
 /* ===================================================================
-   KAYAN AVENUE — design tokens (premium dark-luxe + warm cream)
+   KAYAN AVENUE — "Arabesque Editorial"
+   Warm travertine palette · arch motif · Fraunces / Manrope / mono
+   All colours are sRGB hex/rgba (no oklch) for cross-browser parity.
 =================================================================== */
 @theme {
-  /* dark surfaces */
-  --color-noir: #0a0a0b;
-  --color-ink: #101013;
-  --color-coal: #16161a;
-  --color-graphite: #1d1d22;
+  /* warm neutral surfaces (the "in-between" tone) */
+  --color-umber: #221d15;        /* deep warm — dark accent sections */
+  --color-umber-2: #2c2519;      /* slightly raised dark */
+  --color-espresso: #2c2419;     /* text on light */
+  --color-travertine: #d8cdb6;   /* main mid background */
+  --color-sand: #e6dcc7;         /* lighter section */
+  --color-alabaster: #f2ecdc;    /* lightest — cards */
 
-  /* light surfaces (warm, never stark) */
-  --color-bone: #f2ece1;
-  --color-cream: #e9e2d4;
-  --color-linen: #f7f3ea;
+  /* metals */
+  --color-bronze: #9a7330;       /* readable gold on light */
+  --color-gold: #c19a54;
+  --color-gold-light: #ddba6c;
 
-  /* gold + sand */
-  --color-gold: #c2a25c;
-  --color-gold-light: #e2c789;
-  --color-gold-deep: #a07f37;
-  --color-sand: #b9a988;
+  /* foreground on dark */
+  --color-ivory: #efe7d5;
+  --color-ivory-dim: #b3a98f;
 
-  /* foreground */
-  --color-fg: #1a1611;
-  --color-fg-dim: #6d6457;
-  --color-ivory: #ece6d9;
-  --color-ivory-dim: #9b9488;
+  /* misc */
+  --color-espresso-dim: #6e6450;
+  --color-hair: #c7b89c;         /* warm hairline on light */
+  --color-danger: #b15440;
 
-  /* lines */
-  --color-hair: rgba(20, 16, 10, 0.12);
-  --color-hair-light: rgba(255, 255, 255, 0.1);
-
-  --font-display: var(--font-cormorant), Georgia, serif;
-  --font-roman: var(--font-cinzel), serif;
-  --font-sans: var(--font-jost), system-ui, sans-serif;
-  --font-ar: var(--font-tajawal), sans-serif;
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+  --font-mono: var(--font-mono-jb), ui-monospace, monospace;
+  --font-ar: var(--font-plex-ar), sans-serif;
 
   --ease-lux: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
@@ -42,21 +39,20 @@
 /* ---------- base ---------- */
 *,
 *::before,
-*::after {
-  box-sizing: border-box;
-}
+*::after { box-sizing: border-box; }
 
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
-  color-scheme: dark;
+  color-scheme: light;          /* stop Samsung/Chrome auto-dark inversion */
+  scroll-behavior: auto;
 }
 
 body {
   margin: 0;
-  background: var(--color-ink);
-  color: var(--color-ivory);
+  background: var(--color-travertine);
+  color: var(--color-espresso);
   font-family: var(--font-sans);
   font-weight: 300;
   line-height: 1.7;
@@ -66,98 +62,95 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-::selection {
-  background: var(--color-gold);
-  color: #1a1407;
-}
+::selection { background: var(--color-bronze); color: #f7f1e3; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
 
-img {
-  display: block;
-  max-width: 100%;
-}
+html[lang="ar"] body { font-family: var(--font-ar); }
+html[lang="ar"] .font-display { font-family: var(--font-ar); }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+/* ---------- Lenis ---------- */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
 
-/* Arabic font + RTL refinements */
-html[lang="ar"] body {
-  font-family: var(--font-ar);
-}
-html[lang="ar"] .font-display,
-html[lang="ar"] .font-roman {
-  font-family: var(--font-ar);
-}
-
-/* ---------- Lenis smooth scroll ---------- */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-
-/* ---------- utilities ---------- */
+/* ---------- type helpers ---------- */
 .font-display { font-family: var(--font-display); }
-.font-roman { font-family: var(--font-roman); }
 .font-sans { font-family: var(--font-sans); }
+.font-mono { font-family: var(--font-mono); }
 
-/* gold gradient text with safe fallback */
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+html[lang="ar"] .label { font-family: var(--font-ar); letter-spacing: 0.08em; }
+
+/* gradient gold text + heading accent (sRGB) */
 .text-gold-grad {
-  color: var(--color-gold);
-  background: linear-gradient(135deg, #e6cd92 0%, #c2a25c 45%, #a07f37 75%, #e2c789 100%);
+  color: var(--color-bronze);
+  background: linear-gradient(120deg, #e1bd6e 0%, #c19a54 45%, #9a7330 80%, #ddba6c 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
-/* editorial heading accent (<em> inside translated headings) */
 .lux-heading em {
   font-style: italic;
   font-weight: 500;
-  color: var(--color-gold);
-  background: linear-gradient(135deg, #e6cd92 0%, #c2a25c 45%, #a07f37 75%, #e2c789 100%);
+  color: var(--color-bronze);
+  background: linear-gradient(120deg, #e1bd6e 0%, #c19a54 45%, #9a7330 80%, #ddba6c 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
-.eyebrow {
-  font-family: var(--font-roman);
-  font-weight: 500;
-  font-size: 0.72rem;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
+/* on dark sections the accent uses the lighter gold */
+.on-dark .lux-heading em {
+  background: linear-gradient(120deg, #efcf86 0%, #ddba6c 50%, #c19a54 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 
-.lux-line {
-  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+/* ---------- the signature ARCH motif ---------- */
+.arch {
+  border-radius: 50% 50% 14px 14px / 32% 32% 6px 6px;
+  overflow: hidden;
+}
+.arch-soft {
+  border-radius: 44% 44% 18px 18px / 24% 24% 8px 8px;
+  overflow: hidden;
 }
 
-/* refined scrollbar (desktop) */
+/* ---------- partner marquee ---------- */
+.marquee-mask {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+}
+.marquee-track { display: flex; width: max-content; }
+.marquee-l { animation: marquee-l 42s linear infinite; }
+.marquee-r { animation: marquee-r 50s linear infinite; }
+.marquee-mask:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee-l { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes marquee-r { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-l, .marquee-r { animation: none; }
+}
+
+/* refined scrollbar */
 @media (pointer: fine) {
-  ::-webkit-scrollbar { width: 10px; }
-  ::-webkit-scrollbar-track { background: var(--color-ink); }
+  ::-webkit-scrollbar { width: 11px; }
+  ::-webkit-scrollbar-track { background: var(--color-travertine); }
   ::-webkit-scrollbar-thumb {
-    background: #3a342a;
+    background: #ad9a78;
     border-radius: 10px;
-    border: 2px solid var(--color-ink);
+    border: 3px solid var(--color-travertine);
   }
-  ::-webkit-scrollbar-thumb:hover { background: var(--color-gold-deep); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-bronze); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;

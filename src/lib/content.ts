@@ -212,6 +212,19 @@ export const partners: { name: string; logo: string }[] = [
   { name: "Majid Al Futtaim", logo: "/partners/majid-al-futtaim.jpg" },
 ];
 
+export const manifesto = {
+  label: L("Our Philosophy", "فلسفتنا"),
+  lines: [
+    L("We don't simply sell", "نحن لا نبيع العقارات فحسب،"),
+    L("property — we open doors", "بل نفتح لك الأبواب"),
+    L("to a way of living.", "إلى أسلوب حياة استثنائي."),
+  ],
+  note: L(
+    "Every address we represent is chosen for the life it makes possible.",
+    "كل عنوان نمثّله مُختار بعناية لما يتيحه من أسلوب حياة."
+  ),
+};
+
 export const contactInfo = {
   phoneDisplay: "+971 58 586 0581",
   phoneHref: "tel:+971585860581",

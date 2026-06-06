@@ -16,19 +16,20 @@ export default function Properties() {
   const { t, lang } = useLang();
 
   return (
-    <section id="properties" className="bg-ink py-[clamp(80px,11vw,150px)]">
+    <section id="properties" className="on-dark bg-umber py-[clamp(80px,11vw,150px)] text-ivory">
       <div className="mx-auto max-w-[1280px] px-5 sm:px-8">
-        <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
+        <div className="mb-14 flex flex-wrap items-end justify-between gap-6">
           <div>
             <Reveal>
-              <p className="eyebrow mb-4 flex items-center gap-3 text-gold">
-                <span className="h-px w-9 bg-gold/60" />
+              <p className="label mb-4 flex items-center gap-3 text-gold-light">
+                <span>02</span>
+                <span className="h-px w-9 bg-gold-light/40" />
                 {t({ en: "Featured Listings", ar: "عقارات مختارة" })}
               </p>
             </Reveal>
             <Reveal delay={0.05}>
               <h2
-                className="lux-heading font-display text-[clamp(2rem,4.4vw,3.3rem)] font-medium leading-[1.08] tracking-tight text-white"
+                className="lux-heading max-w-2xl font-display text-[clamp(2rem,4.4vw,3.4rem)] font-medium leading-[1.08] tracking-tight"
                 dangerouslySetInnerHTML={{ __html: lang === "ar" ? heading.ar : heading.en }}
               />
             </Reveal>
@@ -36,18 +37,18 @@ export default function Properties() {
           <Reveal delay={0.1}>
             <button
               onClick={() => scrollToId("contact")}
-              className="hidden rounded-full border border-white/20 px-6 py-3 text-[0.72rem] font-medium uppercase tracking-[0.14em] text-white transition-all hover:-translate-y-0.5 hover:border-gold hover:text-gold sm:inline-block"
+              className="label hidden rounded-full border border-[rgba(239,231,213,0.25)] px-6 py-3 text-[0.68rem] text-ivory transition-all hover:-translate-y-0.5 hover:border-gold-light hover:text-gold-light sm:inline-block"
             >
               {t({ en: "Request Full Portfolio", ar: "اطلب القائمة الكاملة" })}
             </button>
           </Reveal>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
           {properties.map((p, i) => (
-            <Reveal key={p.title.en} delay={(i % 4) * 0.08} className="h-full">
-              <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-coal transition-all duration-500 hover:-translate-y-2 hover:border-gold/40 hover:shadow-[0_40px_80px_-40px_rgba(0,0,0,0.8)]">
-                <div className="relative aspect-[3/2.2] overflow-hidden">
+            <Reveal key={p.title.en} delay={(i % 4) * 0.08}>
+              <article className="group">
+                <div className="arch-soft relative aspect-[3/4] border border-[rgba(239,231,213,0.12)]">
                   <Image
                     src={p.image}
                     alt={t(p.title)}
@@ -55,36 +56,30 @@ export default function Properties() {
                     sizes="(max-width:640px) 90vw, (max-width:1024px) 45vw, 23vw"
                     className="object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-coal/70 to-transparent" />
-                  <span className="absolute start-3 top-3 rounded-full bg-gradient-to-br from-gold-light via-gold to-gold-deep px-3 py-1.5 text-[0.62rem] font-medium uppercase tracking-[0.12em] text-[#241a06]">
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[rgba(34,29,21,0.55)] to-transparent" />
+                  <span className="label absolute start-3 top-4 rounded-full bg-gradient-to-br from-gold-light to-bronze px-3 py-1.5 text-[0.58rem] text-[#221d15]">
                     {t({ en: "For Sale", ar: "للبيع" })}
                   </span>
-                  <span className="absolute end-3 top-3 rounded-full bg-noir/70 px-3 py-1.5 text-[0.62rem] font-medium uppercase tracking-[0.12em] text-ivory backdrop-blur-sm">
+                  <span className="label absolute end-3 top-4 rounded-full bg-[rgba(34,29,21,0.6)] px-3 py-1.5 text-[0.58rem] text-ivory backdrop-blur-sm">
                     {t(p.type)}
                   </span>
                 </div>
 
-                <div className="flex flex-1 flex-col p-6">
-                  <p className="mb-2 flex items-center gap-1.5 text-[0.8rem] text-gold">
-                    <MapPin className="h-4 w-4" />
-                    {t(p.location)}
+                <div className="px-1 pt-5">
+                  <p className="mb-1.5 flex items-center gap-1.5 text-[0.8rem] text-gold-light">
+                    <MapPin className="h-4 w-4" /> {t(p.location)}
                   </p>
-                  <h3 className="font-display text-2xl font-semibold leading-tight text-white">{t(p.title)}</h3>
-
-                  <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 border-b border-white/10 pb-5 text-[0.82rem] text-ivory-dim">
-                    <li className="flex items-center gap-1.5"><BedDouble className="h-4 w-4 text-gold" />{p.beds} {t({ en: "Beds", ar: "غرف" })}</li>
-                    <li className="flex items-center gap-1.5"><Bath className="h-4 w-4 text-gold" />{p.baths} {t({ en: "Baths", ar: "حمام" })}</li>
-                    <li className="flex items-center gap-1.5"><Maximize className="h-4 w-4 text-gold" />{p.area} {t({ en: "sqft", ar: "قدم²" })}</li>
+                  <h3 className="font-display text-2xl font-semibold leading-tight">{t(p.title)}</h3>
+                  <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 border-t border-[rgba(239,231,213,0.12)] pt-4 text-[0.8rem] text-ivory-dim">
+                    <li className="flex items-center gap-1.5"><BedDouble className="h-4 w-4 text-gold-light" />{p.beds}</li>
+                    <li className="flex items-center gap-1.5"><Bath className="h-4 w-4 text-gold-light" />{p.baths}</li>
+                    <li className="flex items-center gap-1.5"><Maximize className="h-4 w-4 text-gold-light" />{p.area} {t({ en: "sqft", ar: "قدم²" })}</li>
                   </ul>
-
-                  <div className="mt-auto flex items-center justify-between pt-5">
-                    <span className="font-display text-xl font-semibold text-white">{p.price}</span>
-                    <button
-                      onClick={() => scrollToId("contact")}
-                      className="flex items-center gap-1 text-[0.72rem] font-medium uppercase tracking-[0.12em] text-gold transition-all hover:gap-2"
-                    >
+                  <div className="mt-4 flex items-center justify-between">
+                    <span className="font-display text-xl font-semibold">{p.price}</span>
+                    <button onClick={() => scrollToId("contact")} className="label flex items-center gap-1 text-[0.64rem] text-gold-light transition-all hover:gap-2">
                       {t({ en: "Enquire", ar: "استفسر" })}
-                      <ArrowUpRight className="h-4 w-4 rtl:rotate-[-90deg]" />
+                      <ArrowUpRight className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
@@ -93,8 +88,8 @@ export default function Properties() {
           ))}
         </div>
 
-        <Reveal delay={0.2}>
-          <p className="mt-10 text-center text-[0.84rem] italic text-ivory-dim">
+        <Reveal delay={0.15}>
+          <p className="mt-12 text-center text-[0.84rem] italic text-ivory-dim">
             {t({
               en: "Sample listings shown for presentation. Contact us for live availability and pricing.",
               ar: "القوائم المعروضة للعرض التوضيحي. تواصل معنا لمعرفة التوفر والأسعار الحالية.",

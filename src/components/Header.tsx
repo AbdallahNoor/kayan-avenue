@@ -37,97 +37,90 @@ export default function Header() {
       className={clsx(
         "fixed inset-x-0 top-0 z-[900] transition-all duration-500",
         scrolled
-          ? "border-b border-white/10 bg-ink/80 py-3 backdrop-blur-xl"
+          ? "border-b border-hair bg-[rgba(242,236,220,0.88)] py-3 backdrop-blur-xl"
           : "border-b border-transparent py-5"
       )}
     >
       <div className="mx-auto flex max-w-[1280px] items-center justify-between gap-6 px-5 sm:px-8">
-        {/* brand */}
         <button onClick={() => go("home")} className="flex items-center gap-3" aria-label="Kayan Avenue Properties">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logo-mark.svg" alt="" className="h-9 w-auto" />
           <span className="flex flex-col leading-none">
-            <span className="font-roman text-[1.2rem] font-semibold tracking-[0.18em] text-gold-grad">KAYAN</span>
-            <span className="mt-[3px] text-[0.5rem] tracking-[0.4em] text-ivory-dim">
+            <span className="font-display text-[1.35rem] font-semibold tracking-[0.04em] text-espresso">Kayan</span>
+            <span className="label mt-1 text-[0.5rem] tracking-[0.34em] text-espresso-dim">
               {t({ en: "AVENUE PROPERTIES", ar: "أفينيو العقارية" })}
             </span>
           </span>
         </button>
 
-        {/* desktop nav */}
         <nav className="hidden items-center gap-9 lg:flex">
           {nav.map((n) => (
             <button
               key={n.id}
               onClick={() => go(n.id)}
-              className="group relative text-[0.84rem] tracking-wide text-ivory/85 transition-colors hover:text-gold"
+              className="group relative text-[0.86rem] font-medium tracking-wide text-espresso/80 transition-colors hover:text-bronze"
             >
               {t(n.label)}
-              <span className="absolute -bottom-1 start-0 h-px w-0 bg-gold transition-all duration-300 group-hover:w-full" />
+              <span className="absolute -bottom-1 start-0 h-px w-0 bg-bronze transition-all duration-300 group-hover:w-full" />
             </button>
           ))}
         </nav>
 
-        {/* actions */}
         <div className="flex items-center gap-3">
           <button
             onClick={toggle}
-            className="rounded-full border border-white/15 px-3.5 py-2 text-[0.74rem] tracking-wide text-ivory/90 transition-colors hover:border-gold hover:text-gold"
+            className="label rounded-full border border-hair px-3.5 py-2 text-[0.7rem] text-espresso transition-colors hover:border-bronze hover:text-bronze"
             aria-label="Switch language"
           >
-            {lang === "en" ? "العربية" : "EN"}
+            {lang === "en" ? "ع" : "EN"}
           </button>
           <button
             onClick={() => go("contact")}
-            className="hidden rounded-full bg-gradient-to-br from-gold-light via-gold to-gold-deep px-5 py-2.5 text-[0.72rem] font-medium uppercase tracking-[0.14em] text-[#241a06] shadow-[0_10px_30px_-12px_rgba(194,162,92,0.7)] transition-transform hover:-translate-y-0.5 sm:inline-block"
+            className="label hidden rounded-full bg-gradient-to-br from-gold-light via-gold to-bronze px-5 py-2.5 text-[0.66rem] text-[#221d15] shadow-[0_10px_28px_-12px_rgba(154,115,48,0.7)] transition-transform hover:-translate-y-0.5 sm:inline-block"
           >
             {t({ en: "Get in Touch", ar: "تواصل معنا" })}
           </button>
-          <button
-            onClick={() => setOpen(true)}
-            className="grid h-10 w-10 place-items-center text-ivory lg:hidden"
-            aria-label="Open menu"
-          >
-            <Menu className="h-6 w-6" />
+          <button onClick={() => setOpen(true)} className="grid h-10 w-10 place-items-center text-espresso lg:hidden" aria-label="Open menu">
+            <Menu className="h-6 w-6" strokeWidth={1.5} />
           </button>
         </div>
       </div>
 
-      {/* mobile overlay */}
       <AnimatePresence>
         {open && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[950] bg-noir/95 backdrop-blur-xl lg:hidden"
+            className="fixed inset-0 z-[950] bg-[rgba(232,221,201,0.98)] backdrop-blur-xl lg:hidden"
           >
             <div className="flex items-center justify-between px-5 py-5 sm:px-8">
-              <span className="font-roman text-[1.2rem] font-semibold tracking-[0.18em] text-gold-grad">KAYAN</span>
-              <button onClick={() => setOpen(false)} aria-label="Close menu" className="grid h-10 w-10 place-items-center text-ivory">
-                <X className="h-6 w-6" />
+              <span className="font-display text-[1.35rem] font-semibold text-espresso">Kayan</span>
+              <button onClick={() => setOpen(false)} aria-label="Close menu" className="grid h-10 w-10 place-items-center text-espresso">
+                <X className="h-6 w-6" strokeWidth={1.5} />
               </button>
             </div>
             <motion.nav
-              className="mt-10 flex flex-col items-center gap-7"
+              className="mt-12 flex flex-col items-center gap-7"
               initial="hidden"
               animate="show"
               variants={{ show: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } } }}
             >
-              {nav.map((n) => (
+              {nav.map((n, i) => (
                 <motion.button
                   key={n.id}
                   onClick={() => go(n.id)}
                   variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
-                  className="font-display text-3xl text-ivory transition-colors hover:text-gold"
+                  className="flex items-baseline gap-3 font-display text-4xl text-espresso transition-colors hover:text-bronze"
                 >
+                  <span className="label text-[0.7rem] text-bronze">{String(i + 1).padStart(2, "0")}</span>
                   {t(n.label)}
                 </motion.button>
               ))}
               <motion.button
                 onClick={() => go("contact")}
                 variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
-                className="mt-4 rounded-full bg-gradient-to-br from-gold-light via-gold to-gold-deep px-7 py-3 text-[0.74rem] font-medium uppercase tracking-[0.14em] text-[#241a06]"
+                className="label mt-4 rounded-full bg-gradient-to-br from-gold-light via-gold to-bronze px-7 py-3 text-[0.72rem] text-[#221d15]"
               >
                 {t({ en: "Get in Touch", ar: "تواصل معنا" })}
               </motion.button>

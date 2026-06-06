@@ -1,34 +1,34 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Cinzel, Jost, Tajawal } from "next/font/google";
+import { Fraunces, Manrope, JetBrains_Mono, IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
 
-const cormorant = Cormorant_Garamond({
+const fraunces = Fraunces({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
-  variable: "--font-cormorant",
+  variable: "--font-fraunces",
   display: "swap",
 });
 
-const cinzel = Cinzel({
+const manrope = Manrope({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-cinzel",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-manrope",
   display: "swap",
 });
 
-const jost = Jost({
+const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-jost",
+  weight: ["400", "500"],
+  variable: "--font-mono-jb",
   display: "swap",
 });
 
-const tajawal = Tajawal({
+const plexArabic = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
-  weight: ["300", "400", "500", "700"],
-  variable: "--font-tajawal",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-plex-ar",
   display: "swap",
 });
 
@@ -63,22 +63,18 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#101013",
-  colorScheme: "dark",
+  themeColor: "#d8cdb6",
+  colorScheme: "light",
   width: "device-width",
   initialScale: 1,
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
       dir="ltr"
-      className={`${cormorant.variable} ${cinzel.variable} ${jost.variable} ${tajawal.variable}`}
+      className={`${fraunces.variable} ${manrope.variable} ${jetbrains.variable} ${plexArabic.variable}`}
       suppressHydrationWarning
     >
       <body>

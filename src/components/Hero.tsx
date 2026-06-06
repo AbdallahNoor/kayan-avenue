@@ -3,9 +3,9 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
-import { ChevronDown } from "lucide-react";
 import { useLang } from "@/lib/i18n";
 import { stats } from "@/lib/content";
+import { useAllowParallax } from "@/lib/useMediaQuery";
 import Counter from "./ui/Counter";
 import { scrollToId } from "./SmoothScroll";
 
@@ -18,62 +18,44 @@ const ease = [0.22, 0.61, 0.36, 1] as const;
 
 export default function Hero() {
   const { t, lang } = useLang();
+  const parallax = useAllowParallax();
   const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
-  const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
-  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.14]);
+  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "-7%"]);
 
   return (
-    <section ref={ref} id="home" className="relative flex min-h-[100svh] items-center overflow-hidden">
-      {/* background */}
-      <motion.div style={{ y: imgY, scale: imgScale }} className="absolute inset-0 -z-10">
-        <Image
-          src="/images/villa-night.jpg"
-          alt="Luxury villa overlooking Dubai at dusk"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-noir/92 via-noir/65 to-noir/25" />
-        <div className="absolute inset-0 bg-gradient-to-t from-noir via-noir/10 to-noir/40" />
-      </motion.div>
+    <section ref={ref} id="home" className="relative overflow-hidden bg-travertine pb-[clamp(48px,7vw,90px)] pt-[clamp(120px,16vh,180px)]">
+      {/* soft warm glow */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-0 h-[60%] bg-[radial-gradient(60%_70%_at_50%_0%,rgba(221,186,108,0.18),rgba(216,205,182,0)_70%)]" />
 
-      <motion.div
-        style={{ y: contentY, opacity: contentOpacity }}
-        className="mx-auto w-full max-w-[1280px] px-5 pt-28 sm:px-8"
-      >
+      <div className="relative mx-auto max-w-[1280px] px-5 text-center sm:px-8">
         <motion.div
           initial="hidden"
           animate="show"
-          variants={{ show: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } } }}
-          className="max-w-3xl"
+          variants={{ show: { transition: { staggerChildren: 0.12, delayChildren: 0.15 } } }}
         >
           <motion.p
-            variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
-            transition={{ duration: 0.8, ease }}
-            className="eyebrow mb-6 flex items-center gap-3 text-gold"
+            variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }}
+            transition={{ duration: 0.7, ease }}
+            className="label mb-6 inline-flex items-center gap-3 text-bronze"
           >
-            <span className="h-px w-9 bg-gold/70" />
-            {t({ en: "Kayan Avenue Properties · Dubai", ar: "كيان أفينيو العقارية · دبي" })}
+            <span className="h-px w-8 bg-bronze/50" />
+            {t({ en: "Kayan Avenue — Dubai", ar: "كيان أفينيو — دبي" })}
+            <span className="h-px w-8 bg-bronze/50" />
           </motion.p>
 
           <motion.h1
-            variants={{ hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0 } }}
+            variants={{ hidden: { opacity: 0, y: 26 }, show: { opacity: 1, y: 0 } }}
             transition={{ duration: 1, ease }}
-            className="lux-heading font-display text-[clamp(2.8rem,6.4vw,5.4rem)] font-medium leading-[1.02] tracking-tight text-white"
+            className="lux-heading mx-auto max-w-5xl font-display text-[clamp(2.6rem,6.2vw,5.2rem)] font-medium leading-[1.03] tracking-[-0.01em] text-espresso"
             dangerouslySetInnerHTML={{ __html: lang === "ar" ? heading.ar : heading.en }}
           />
 
           <motion.p
-            variants={{ hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0 } }}
+            variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
             transition={{ duration: 0.9, ease }}
-            className="mt-7 max-w-xl text-[clamp(1rem,1.3vw,1.18rem)] text-ivory/80"
+            className="mx-auto mt-6 max-w-xl text-[clamp(1rem,1.3vw,1.16rem)] text-espresso-dim"
           >
             {t({
               en: "A refined real estate experience focused on premium properties, trusted guidance, and carefully selected opportunities across Dubai.",
@@ -82,59 +64,56 @@ export default function Hero() {
           </motion.p>
 
           <motion.div
-            variants={{ hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0 } }}
+            variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
             transition={{ duration: 0.9, ease }}
-            className="mt-9 flex flex-wrap gap-4"
+            className="mt-9 flex flex-wrap justify-center gap-4"
           >
             <button
               onClick={() => scrollToId("properties")}
-              className="rounded-full bg-gradient-to-br from-gold-light via-gold to-gold-deep px-8 py-4 text-[0.78rem] font-medium uppercase tracking-[0.16em] text-[#241a06] shadow-[0_14px_38px_-14px_rgba(194,162,92,0.8)] transition-transform hover:-translate-y-1"
+              className="label rounded-full bg-gradient-to-br from-gold-light via-gold to-bronze px-8 py-4 text-[0.74rem] text-[#221d15] shadow-[0_14px_38px_-14px_rgba(154,115,48,0.8)] transition-transform hover:-translate-y-1"
             >
               {t({ en: "Explore Properties", ar: "استكشف العقارات" })}
             </button>
             <button
               onClick={() => scrollToId("contact")}
-              className="rounded-full border border-white/25 bg-white/5 px-8 py-4 text-[0.78rem] font-medium uppercase tracking-[0.16em] text-white backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-gold hover:text-gold"
+              className="label rounded-full border border-espresso/25 px-8 py-4 text-[0.74rem] text-espresso transition-all hover:-translate-y-1 hover:border-bronze hover:text-bronze"
             >
               {t({ en: "Contact Us", ar: "تواصل معنا" })}
             </button>
           </motion.div>
-
-          <motion.div
-            variants={{ hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0 } }}
-            transition={{ duration: 0.9, ease }}
-            className="mt-14 flex flex-wrap gap-x-10 gap-y-6 border-t border-white/10 pt-8"
-          >
-            {stats.map((s) => (
-              <div key={s.label.en}>
-                <div className="font-display text-[clamp(1.9rem,3vw,2.7rem)] font-semibold leading-none text-gold-grad">
-                  <Counter to={s.value} suffix={s.suffix} />
-                </div>
-                <div className="mt-2 text-[0.7rem] uppercase tracking-[0.12em] text-ivory-dim">
-                  {t(s.label)}
-                </div>
-              </div>
-            ))}
-          </motion.div>
         </motion.div>
-      </motion.div>
 
-      <motion.button
-        onClick={() => scrollToId("about")}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.4, duration: 1 }}
-        className="absolute bottom-7 left-1/2 -translate-x-1/2 text-ivory/60 transition-colors hover:text-gold"
-        aria-label="Scroll down"
-      >
-        <motion.span
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-          className="block"
+        {/* arch portal */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.1, ease, delay: 0.5 }}
+          className="arch relative mx-auto mt-14 aspect-[16/12] w-full max-w-4xl border border-[rgba(154,115,48,0.25)] shadow-[0_50px_100px_-50px_rgba(34,29,21,0.6)] sm:aspect-[16/9]"
         >
-          <ChevronDown className="h-6 w-6" />
-        </motion.span>
-      </motion.button>
+          <motion.div style={parallax ? { scale: imgScale, y: imgY } : undefined} className="absolute inset-0">
+            <Image src="/images/villa-night.jpg" alt="Luxury villa in Dubai at dusk" fill priority sizes="(max-width:1024px) 100vw, 900px" className="object-cover" />
+          </motion.div>
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[rgba(34,29,21,0.45)] to-transparent" />
+        </motion.div>
+
+        {/* stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, ease }}
+          className="mx-auto mt-12 grid max-w-3xl grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4"
+        >
+          {stats.map((s) => (
+            <div key={s.label.en} className="text-center">
+              <div className="font-display text-[clamp(2rem,3.2vw,2.9rem)] font-semibold leading-none text-gold-grad">
+                <Counter to={s.value} suffix={s.suffix} />
+              </div>
+              <div className="label mt-2 text-[0.62rem] text-espresso-dim">{t(s.label)}</div>
+            </div>
+          ))}
+        </motion.div>
+      </div>
     </section>
   );
 }
