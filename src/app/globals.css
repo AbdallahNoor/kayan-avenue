@@ -41,13 +41,15 @@
 *::before,
 *::after { box-sizing: border-box; }
 
+:root { color-scheme: only light; }
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
-  color-scheme: light;          /* stop Samsung/Chrome auto-dark inversion */
+  color-scheme: only light;     /* "only" = firmly opt out of Samsung/Chrome auto-dark */
   scroll-behavior: auto;
 }
+body { color-scheme: only light; }
 
 body {
   margin: 0;

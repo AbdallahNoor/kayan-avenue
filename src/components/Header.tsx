@@ -36,6 +36,7 @@ export default function Header() {
   const onLight = scrolled;
 
   return (
+    <>
     <header
       className={clsx(
         "fixed inset-x-0 top-0 z-[900] transition-all duration-500",
@@ -96,6 +97,7 @@ export default function Header() {
           </button>
         </div>
       </div>
+    </header>
 
       <AnimatePresence>
         {open && (
@@ -103,7 +105,7 @@ export default function Header() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[950] bg-[rgba(232,221,201,0.98)] backdrop-blur-xl lg:hidden"
+            className="fixed inset-0 z-[950] bg-[#e7ddca] lg:hidden"
           >
             <div className="flex items-center justify-between px-5 py-5 sm:px-8">
               <span className="font-display text-[1.35rem] font-semibold text-espresso">Kayan</span>
@@ -139,6 +141,6 @@ export default function Header() {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }
