@@ -147,7 +147,9 @@ html[lang="ar"] .text-gold-grad {
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
 }
-.marquee-track { display: flex; width: max-content; }
+/* Force LTR layout so the marquee animates identically in EN and AR (RTL flips
+   flex layout + overflow direction and breaks the translateX loop). */
+.marquee-track { display: flex; width: max-content; direction: ltr; }
 .marquee-l { animation: marquee-l 42s linear infinite; }
 .marquee-r { animation: marquee-r 50s linear infinite; }
 .marquee-l-slow { animation: marquee-l 70s linear infinite; }
